@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="en">
 <head>
   <meta charset="UTF-8" />
@@ -12,7 +12,7 @@
       background-color: #121212; 
       color: #f0f0f0; 
       line-height: 1.6;
-      font-size: clamp(0.8rem, 2vw, 1rem); /* dinamična velikost */
+      font-size: clamp(0.8rem, 2vw, 1rem);
     }
 
     header { 
@@ -131,12 +131,166 @@
       color: #888; 
     }
 
-    .socials a { 
-      margin: 0 1rem; 
-      color: #00ff88; 
-      text-decoration: none; 
-      font-weight: bold; 
-      font-size: clamp(0.8rem, 2vw, 1rem);
+    /* socials container (desktop default: inline row) */
+    .socials { 
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 0.6rem;
+      flex-wrap: wrap;
+      margin-top: 0.5rem;
+      padding: 0 0.5rem; /* small side padding to keep margin from edges */
+    }
+
+    /* desktop + large screens: normal size */
+    .socials a, .socials button.policy-link {
+      margin: 0 0.25rem;
+      color: #00ff88;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: clamp(0.74rem, 1.6vw, 0.9rem);
+      background: transparent;
+      border: 0;
+      cursor: pointer;
+      padding: 0.18rem 0.45rem;
+      border-radius: 6px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 130ms ease, box-shadow 130ms ease, background 130ms ease;
+      white-space: nowrap;
+      min-height: 30px;
+    }
+
+    .policy-link {
+      padding: 0.18rem 0.5rem;
+      font-size: clamp(0.68rem, 1.3vw, 0.82rem);
+      border-radius: 8px;
+      background: linear-gradient(90deg, rgba(0,255,136,0.05), rgba(0,204,106,0.01));
+      border: 1px solid rgba(0,255,136,0.08);
+      box-shadow: 0 6px 12px rgba(0,255,136,0.02);
+      color: #c8ffd8;
+      line-height: 1;
+    }
+
+    .policy-link:hover, .socials a:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 22px rgba(0,255,136,0.06);
+      background: linear-gradient(90deg, rgba(0,255,136,0.09), rgba(0,204,106,0.04));
+      color: #ecfff3;
+    }
+
+    /* Slightly smaller on tablets (<=1024px) */
+    @media (max-width: 1024px) {
+      .socials a, .socials button.policy-link {
+        font-size: 0.78rem;
+        padding: 0.14rem 0.38rem;
+        min-height: 28px;
+      }
+      .policy-link { font-size: 0.72rem; padding: 0.12rem 0.36rem; }
+    }
+
+    /* MOBILE / SMALL SCREENS: make buttons even smaller and arrange in 4 columns
+       Center items and reduce inner gaps so buttons are less "stitched" in center.
+       Keep small left/right padding so there's margin from screen edges. */
+    @media (max-width: 600px) {
+      .socials {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr); /* 4 buttons in one row */
+        gap: 0.25rem; /* reduced gap between center buttons */
+        padding: 0 0.9rem; /* a bit wider side padding to keep margin from edges */
+        align-items: center;
+        justify-items: center; /* center each button inside its grid cell */
+      }
+
+      .socials a, .socials button.policy-link {
+        width: 100%;
+        max-width: 110px; /* keeps buttons from stretching too wide, adds breathing room */
+        justify-content: center;
+        padding: 0.12rem 0.18rem;
+        font-size: 0.62rem; /* much smaller on phones */
+        border-radius: 6px;
+        min-height: 36px;
+        box-sizing: border-box;
+      }
+
+      .policy-link { padding: 0.12rem 0.18rem; font-size: 0.6rem; min-height: 36px; }
+    }
+
+    /* VERY NARROW (<=340px): keep 4 columns but slightly adjust sizes for readability */
+    @media (max-width: 340px) {
+      .socials {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.22rem;
+        padding: 0 0.7rem;
+      }
+      .socials a, .socials button.policy-link {
+        min-height: 38px;
+        font-size: 0.58rem;
+        max-width: 100px;
+      }
+    }
+
+    /* Modal (overlay) */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.6);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .modal {
+      background: #0f0f10;
+      color: #f0f0f0;
+      border-radius: 12px;
+      max-width: 900px;
+      width: 100%;
+      max-height: 90vh;
+      overflow: hidden;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.7);
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal-header {
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      padding: clamp(0.6rem, 2vw, 1rem);
+      border-bottom: 1px solid rgba(255,255,255,0.04);
+    }
+
+    .modal-title {
+      font-size: clamp(1rem, 3vw, 1.25rem);
+      color: #00ff88;
+      font-weight: 700;
+    }
+
+    .modal-close {
+      background: transparent;
+      border: 0;
+      color: #ccc;
+      font-size: clamp(1rem, 3vw, 1.1rem);
+      cursor: pointer;
+    }
+
+    .modal-body {
+      padding: clamp(0.8rem, 2.5vw, 1.2rem);
+      overflow: auto;
+      font-size: clamp(0.85rem, 2.2vw, 1.05rem);
+      line-height: 1.5;
+      color: #e6e6e6;
+    }
+
+    .modal-body p { margin-bottom: 0.8rem; color: #d4d4d4; }
+
+    @media (max-width: 480px) {
+      .modal { border-radius: 8px; }
+      .modal-body { font-size: 0.95rem; padding: 0.9rem; }
     }
   </style>
 </head>
@@ -177,11 +331,148 @@
 
   <footer>
     <p>© 2025 Froglint Games Limited</p>
-    <div class="socials">
-      <a href="https://web.facebook.com/profile.php?id=61579300282608&locale=sl_SI" target="_blank">Facebook</a>
-      <!-- a href="https://youtube.com/@froglintgames" target="_blank">YouTube</a -->
+    <div class="socials" role="navigation" aria-label="Socials and policies">
+      <a href="https://web.facebook.com/profile.php?id=61579300282608&locale=sl_SI" target="_blank" rel="noopener">Facebook</a>
       <a href="mailto:froglintgames@gmail.com">Email</a>
+
+      <!-- compact policy buttons -->
+      <button class="policy-link" data-policy="returns">Returns</button>
+      <button class="policy-link" data-policy="refunds">Refunds &amp; Disputes</button>
+      <button class="policy-link" data-policy="cancellation">Cancellations</button>
+      <button class="policy-link" data-policy="export">Legal / Export</button>
+      <button class="policy-link" data-policy="promotions">Promotions T&amp;C</button>
+
+      <!-- NEW: Red-listed countries button -->
+      <button class="policy-link" data-policy="redlist">Red-listed countries</button>
     </div>
   </footer>
+
+  <!-- Modal overlay (single, reused) -->
+  <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
+    <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+      <div class="modal-header">
+        <div id="modalTitle" class="modal-title">Policy</div>
+        <button class="modal-close" id="modalClose" aria-label="Close">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- content injected dynamically -->
+      </div>
+    </div>
+  </div>
+
+  <script>
+    /* English policy texts, including red-listed countries */
+    const policies = {
+      returns: {
+        title: "Return policy & process",
+        html: `
+          <p><strong>Key point:</strong> No returns. We do not ship to red-listed countries.</p>
+          <p>Please check product descriptions carefully before ordering. If you receive a damaged or incorrect item, contact us within <strong>14 days</strong> of delivery at <a href="mailto:froglintgames@gmail.com">froglintgames@gmail.com</a> with photos and a description. We will review the case and, when appropriate, offer a replacement or repair where feasible.</p>
+          <p><em>Important:</em> Orders originating from countries that are classified as red (export-restricted) will not be shipped.</p>
+        `
+      },
+      refunds: {
+        title: "Refund & dispute policy",
+        html: `
+          <p>Generally, refunds are not provided. If a valid issue arises that is our responsibility (e.g., wrong or damaged item confirmed by evidence), we will investigate and propose a reasonable remedy such as replacement.</p>
+          <p>If a payment dispute is needed, customers may also engage their payment provider (card issuer or payment processor) to request charge reversal — this process is between the customer and their payment provider. To start any internal review, email <a href="mailto:froglintgames@gmail.com">froglintgames@gmail.com</a> with transaction details and supporting evidence.</p>
+        `
+      },
+      cancellation: {
+        title: "Cancellation policy",
+        html: `
+          <p>Orders can be cancelled only while they have not yet been shipped. If you need to cancel or change an order, contact us immediately at <a href="mailto:froglintgames@gmail.com">froglintgames@gmail.com</a>.</p>
+          <p>Once an order has shipped, cancellation is not possible — see the Returns section for what applies after shipment. We will do our best to assist with urgent requests but cannot guarantee cancellation after dispatch.</p>
+        `
+      },
+      export: {
+        title: "Legal & export restrictions",
+        html: `
+          <p>We comply with applicable export and trade restrictions. We will not ship to countries subject to export prohibitions or that are otherwise classified as red-listed.</p>
+          <p>Buyers are responsible for any import duties, taxes or customs charges imposed by their country. Froglint Games Limited is not liable for goods held or seized by customs due to local restrictions.</p>
+        `
+      },
+      promotions: {
+        title: "Terms & conditions of promotions",
+        html: `
+          <p>All promotions have specific timeframes and terms published with each offer. Promotions apply only to the products and periods stated in the promotional materials.</p>
+          <p>Promotions do not alter our standard returns & shipping policies (including restrictions on shipping to red-listed countries) unless explicitly stated. Participation in promotions implies acceptance of the published terms.</p>
+        `
+      },
+      /* New red-listed countries content:
+         NOTE: this is an illustrative/example list. Please review and update according to your legal/compliance rules. */
+      redlist: {
+        title: "Red-listed countries (no shipping)",
+        html: `
+          <p><strong>We do not ship to the following countries/regions:</strong></p>
+          <ul>
+            <li>North Korea (Democratic People's Republic of Korea)</li>
+            <li>Iran</li>
+            <li>Syria</li>
+            <li>Cuba</li>
+            <li>Crimea region (where applicable)</li>
+            <li>Sudan / South Sudan</li>
+            <li>Myanmar (Burma)</li>
+            <li>Venezuela (in certain regions — see local restrictions)</li>
+            <li>Afghanistan</li>
+            <li>Somalia</li>
+            <li>Yemen</li>
+          </ul>
+          <p><em>Important note:</em> The list above is provided as an example and may not reflect all current export controls, sanctions or carrier restrictions. Export/trade controls and sanctioned country lists change over time.</p>
+          <p>If your country is not listed above but you suspect shipping may be restricted, or if you need clarification, please contact us at <a href="mailto:froglintgames@gmail.com">froglintgames@gmail.com</a> before placing an order. We recommend that Froglint Games update this list in consultation with legal/advisory resources to reflect the company's actual compliance policy.</p>
+        `
+      }
+    };
+
+    const modalOverlay = document.getElementById('modalOverlay');
+    const modalTitle = document.getElementById('modalTitle');
+    const modalBody = document.getElementById('modalBody');
+    const modalClose = document.getElementById('modalClose');
+
+    function openPolicy(key) {
+      const p = policies[key];
+      if (!p) return;
+      modalTitle.textContent = p.title;
+      modalBody.innerHTML = p.html;
+      modalOverlay.style.display = "flex";
+      modalOverlay.setAttribute('aria-hidden', 'false');
+      modalClose.focus();
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeModal() {
+      modalOverlay.style.display = "none";
+      modalOverlay.setAttribute('aria-hidden', 'true');
+      modalBody.innerHTML = "";
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.policy-link').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const key = btn.getAttribute('data-policy');
+        openPolicy(key);
+      });
+    });
+
+    modalClose.addEventListener('click', closeModal);
+
+    modalOverlay.addEventListener('click', (e) => {
+      if (e.target === modalOverlay) closeModal();
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && modalOverlay.style.display === 'flex') {
+        closeModal();
+      }
+    });
+
+    // Basic focus trap while modal open
+    document.addEventListener('focus', function(event) {
+      if (modalOverlay.style.display === 'flex' && !modalOverlay.contains(event.target)) {
+        event.stopPropagation();
+        modalClose.focus();
+      }
+    }, true);
+  </script>
 </body>
 </html>
