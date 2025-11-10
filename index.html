@@ -362,46 +362,87 @@
   </div>
 
   <script>
-    /* English policy texts, including red-listed countries */
+    /* Updated policy texts, separated for EU and U.S./other regions.
+       Tone is neutral and customer-friendly while remaining legally aligned. */
     const policies = {
       returns: {
         title: "Return policy & process",
         html: `
-          <p><strong>Key point:</strong> No returns. We do not ship to red-listed countries.</p>
-          <p>Please check product descriptions carefully before ordering. If you receive a damaged or incorrect item, contact us within <strong>14 days</strong> of delivery at <a href="mailto:froglintgames@gmail.com">froglintgames@gmail.com</a> with photos and a description. We will review the case and, when appropriate, offer a replacement or repair where feasible.</p>
-          <p><em>Important:</em> Orders originating from countries that are classified as red (export-restricted) will not be shipped.</p>
+          <p>We stand by the quality of our products and want every customer to be satisfied. If you receive an incorrect or damaged item, please contact us within <strong>14 days of delivery</strong> at <a href="mailto:froglintgames@gmail.com">froglintgames@gmail.com</a> with a description and photos so we can assess and resolve the issue quickly.</p>
+
+          <h3>For customers in the European Union (EU)</h3>
+          <p>Under applicable EU consumer law, you have a statutory <strong>14-day right of withdrawal</strong> starting from the day you receive your order. Returned items should be unused and in their original condition and packaging. Please email us before returning anything so we can provide return instructions and, where applicable, a returns address.</p>
+          <p><strong>Exceptions:</strong> Digital goods (e.g., downloads or license keys) are non-refundable once access or download has begun if you consented to immediate delivery at purchase. Customized, personalized, or made-to-order items are generally non-returnable unless they are defective.</p>
+
+          <h3>For customers in the United States and other non-EU regions</h3>
+          <p>We accept returns where items are defective, incorrect, or damaged in transit. If you experience one of these issues, contact us within <strong>14 days of delivery</strong> with photos and order details. For non-defective orders, returns are not generally accepted once the order is confirmed and shipped, but we will always work with you to find a fair solution where reasonable.</p>
         `
       },
       refunds: {
-        title: "Refund & dispute policy",
+        title: "Refunds & dispute policy",
         html: `
-          <p>Generally, refunds are not provided. If a valid issue arises that is our responsibility (e.g., wrong or damaged item confirmed by evidence), we will investigate and propose a reasonable remedy such as replacement.</p>
-          <p>If a payment dispute is needed, customers may also engage their payment provider (card issuer or payment processor) to request charge reversal — this process is between the customer and their payment provider. To start any internal review, email <a href="mailto:froglintgames@gmail.com">froglintgames@gmail.com</a> with transaction details and supporting evidence.</p>
+          <p>We process refunds fairly and transparently in all regions.</p>
+
+          <h3>How refunds are handled</h3>
+          <p>If a return or claim is approved (for example, a verified damaged or incorrect item), we will issue a refund to the original payment method. Refunds are normally processed within <strong>14 business days</strong> of approval, depending on your payment provider.</p>
+
+          <h3>Payment disputes</h3>
+          <p>If you believe a charge was unauthorized or unresolved, you may also contact your payment provider (card issuer or processor) to initiate a dispute or chargeback under their procedures. We ask that you contact us first at <a href="mailto:froglintgames@gmail.com">froglintgames@gmail.com</a> with full transaction details and supporting evidence so we can investigate and aim to resolve the matter directly and promptly.</p>
         `
       },
       cancellation: {
-        title: "Cancellation policy",
+        title: "Cancellations & pre-orders",
         html: `
-          <p>Orders can be cancelled only while they have not yet been shipped. If you need to cancel or change an order, contact us immediately at <a href="mailto:froglintgames@gmail.com">froglintgames@gmail.com</a>.</p>
-          <p>Once an order has shipped, cancellation is not possible — see the Returns section for what applies after shipment. We will do our best to assist with urgent requests but cannot guarantee cancellation after dispatch.</p>
+          <p>We understand plans can change. Below are our cancellation and pre-order terms, presented region-by-region for clarity.</p>
+
+          <h3>Before shipping or production</h3>
+          <p>Orders can be cancelled free of charge while they have not yet entered production or been dispatched. If you need to cancel, contact us immediately at <a href="mailto:froglintgames@gmail.com">froglintgames@gmail.com</a>. We will confirm whether cancellation is possible and advise next steps.</p>
+
+          <h3>After shipping or production has started</h3>
+          <p>Once an order has been dispatched or production has begun, cancellation is generally not possible. In such cases, EU customers may still exercise the 14-day withdrawal right after delivery (see Returns). For other regions, cancellation after dispatch is not normally available, but we will always consider reasonable requests.</p>
+
+          <h3>Pre-orders</h3>
+          <p>Pre-orders help us secure production capacity and limited edition runs. Pre-orders are charged at the time of purchase and <strong>secure your reservation</strong>. By placing a pre-order you agree that the order is binding unless cancelled prior to production or fulfillment starting.</p>
+          <p><strong>EU customers:</strong> The 14-day withdrawal right applies <em>after the product is delivered</em>. Until delivery, pre-orders may be cancelled only before production or shipment begins.</p>
+          <p><strong>U.S. &amp; other regions:</strong> Pre-orders are generally non-cancellable once production or fulfillment has started. In cases of significant delays beyond the stated estimated shipping window, we will notify affected customers with updated timing and offer the option to cancel if preferred (in line with common e-commerce best practice).</p>
+          <p><em>Tip:</em> To reduce cancellations, we recommend including a clear estimated shipping date on the product page and offering pre-order incentives (bonus content, limited editions) that help customers feel confident keeping their reservation.</p>
         `
       },
       export: {
         title: "Legal & export restrictions",
         html: `
-          <p>We comply with applicable export and trade restrictions. We will not ship to countries subject to export prohibitions or that are otherwise classified as red-listed.</p>
-          <p>Buyers are responsible for any import duties, taxes or customs charges imposed by their country. Froglint Games Limited is not liable for goods held or seized by customs due to local restrictions.</p>
+          <p>Froglint Games Limited complies with applicable export control, trade sanctions, and carrier restrictions in the EU, the United States, and other jurisdictions. We reserve the right to refuse or cancel orders that violate export controls or sanction lists.</p>
+
+          <h3>Where we cannot ship</h3>
+          <p>We do not ship to countries or regions that are subject to trade embargoes, sanctions, or other export prohibitions. Examples include (but are not limited to):</p>
+          <ul>
+            <li>North Korea (Democratic People's Republic of Korea)</li>
+            <li>Iran</li>
+            <li>Syria</li>
+            <li>Cuba</li>
+            <li>Crimea region (where applicable)</li>
+            <li>Sudan / South Sudan</li>
+            <li>Myanmar (Burma)</li>
+            <li>Venezuela (in certain regions — see local restrictions)</li>
+            <li>Afghanistan</li>
+            <li>Somalia</li>
+            <li>Yemen</li>
+          </ul>
+
+          <h3>Import duties & customs</h3>
+          <p>Buyers are responsible for any import duties, taxes, or customs charges imposed by their country. Froglint Games Limited is not liable for goods delayed, held, or seized by customs due to local restrictions. If in doubt about local import rules, please check with your local authorities before ordering.</p>
+
+          <p>If you are unsure whether we can ship to your address or have questions about export compliance, contact us at <a href="mailto:froglintgames@gmail.com">froglintgames@gmail.com</a> before placing your order.</p>
         `
       },
       promotions: {
         title: "Terms & conditions of promotions",
         html: `
           <p>All promotions have specific timeframes and terms published with each offer. Promotions apply only to the products and periods stated in the promotional materials.</p>
-          <p>Promotions do not alter our standard returns & shipping policies (including restrictions on shipping to red-listed countries) unless explicitly stated. Participation in promotions implies acceptance of the published terms.</p>
+          <p>Promotions do not alter our standard returns &amp; shipping policies (including restrictions on shipping to red-listed countries) unless explicitly stated. Participation in promotions implies acceptance of the published terms.</p>
         `
       },
-      /* New red-listed countries content:
-         NOTE: this is an illustrative/example list. Please review and update according to your legal/compliance rules. */
+      /* keep redlist content as before */
       redlist: {
         title: "Red-listed countries (no shipping)",
         html: `
@@ -477,9 +518,3 @@
   </script>
 </body>
 </html>
-
-
-
-
-
-
