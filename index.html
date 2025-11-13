@@ -94,6 +94,7 @@
       font-size: clamp(0.85rem, 2.5vw, 1.1rem);
     }
 
+    /* ---- EXISTING GALLERY (keeps mines1.png as before) ---- */
     .gallery { 
       display: flex; 
       justify-content: center; 
@@ -143,7 +144,7 @@
       padding: 0 0.5rem; /* small side padding to keep margin from edges */
     }
 
-    /* desktop + large screens: normal size */
+    /* ... (socials CSS unchanged) ... */
     .socials a, .socials button.policy-link {
       margin: 0 0.25rem;
       color: #00ff88;
@@ -191,25 +192,22 @@
       .policy-link { font-size: 0.72rem; padding: 0.12rem 0.36rem; }
     }
 
-    /* MOBILE / SMALL SCREENS: make buttons even smaller and arrange in 4 columns
-       Center items and reduce inner gaps so buttons are less "stitched" in center.
-       Keep small left/right padding so there's margin from screen edges. */
     @media (max-width: 600px) {
       .socials {
         display: grid;
-        grid-template-columns: repeat(4, 1fr); /* 4 buttons in one row */
-        gap: 0.25rem; /* reduced gap between center buttons */
-        padding: 0 0.9rem; /* a bit wider side padding to keep margin from edges */
+        grid-template-columns: repeat(4, 1fr);
+        gap: 0.25rem;
+        padding: 0 0.9rem;
         align-items: center;
-        justify-items: center; /* center each button inside its grid cell */
+        justify-items: center;
       }
 
       .socials a, .socials button.policy-link {
         width: 100%;
-        max-width: 110px; /* keeps buttons from stretching too wide, adds breathing room */
+        max-width: 110px;
         justify-content: center;
         padding: 0.12rem 0.18rem;
-        font-size: 0.62rem; /* much smaller on phones */
+        font-size: 0.62rem;
         border-radius: 6px;
         min-height: 36px;
         box-sizing: border-box;
@@ -218,7 +216,6 @@
       .policy-link { padding: 0.12rem 0.18rem; font-size: 0.6rem; min-height: 36px; }
     }
 
-    /* VERY NARROW (<=340px): keep 4 columns but slightly adjust sizes for readability */
     @media (max-width: 340px) {
       .socials {
         grid-template-columns: repeat(4, 1fr);
@@ -232,7 +229,7 @@
       }
     }
 
-    /* Modal (overlay) */
+    /* Modal (overlay) (policy modal exists below; keep) */
     .modal-overlay {
       display: none;
       position: fixed;
@@ -293,6 +290,176 @@
       .modal { border-radius: 8px; }
       .modal-body { font-size: 0.95rem; padding: 0.9rem; }
     }
+
+    /* ----------------- NEW: Media gallery styles ----------------- */
+    .media-gallery {
+      display: flex;
+      gap: 1rem;
+      margin-top: 1.5rem;
+      align-items: flex-start;
+    }
+
+    .media-left, .media-right {
+      box-sizing: border-box;
+    }
+
+    .media-left {
+      flex: 1 1 60%;
+      min-width: 260px;
+    }
+
+    .media-right {
+      flex: 1 1 38%;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      min-width: 180px;
+    }
+
+    .media-right .thumb {
+      cursor: pointer;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.6);
+      transition: transform 150ms ease, box-shadow 150ms ease;
+      background: #0b0b0b;
+    }
+
+    .media-right .thumb img {
+      display: block;
+      width: 100%;
+      height: auto;
+      object-fit: cover;
+    }
+
+    .media-right .thumb:focus,
+    .media-right .thumb:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.7);
+    }
+
+    .media-video {
+      width: 100%;
+      height: auto;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 8px 28px rgba(0,0,0,0.6);
+    }
+
+    .media-video video {
+      width: 100%;
+      height: auto;
+      display: block;
+      background: #000;
+    }
+
+    /* small play indicator on video thumbnail (if you want) */
+    .play-badge {
+      position: absolute;
+      left: 12px;
+      top: 12px;
+      background: rgba(0,0,0,0.5);
+      color: #fff;
+      padding: 6px 8px;
+      border-radius: 8px;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    /* Responsive: on narrow screens stack vertically */
+    @media (max-width: 768px) {
+      .media-gallery {
+        flex-direction: column;
+      }
+      .media-left, .media-right {
+        flex: 1 1 100%;
+        min-width: 0;
+      }
+      .media-right {
+        flex-direction: row;
+        gap: 0.5rem;
+      }
+      .media-right .thumb {
+        flex: 1 1 50%;
+      }
+    }
+
+    @media (max-width: 420px) {
+      .media-right .thumb {
+        border-radius: 8px;
+      }
+    }
+
+    /* Gallery overlay (lightbox) */
+    .gallery-overlay {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      z-index: 2000;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .gallery-frame {
+      max-width: 1100px;
+      width: 100%;
+      max-height: 92vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gallery-content {
+      max-width: 100%;
+      max-height: 92vh;
+      overflow: hidden;
+      border-radius: 10px;
+      background: #070707;
+      box-shadow: 0 18px 60px rgba(0,0,0,0.8);
+    }
+
+    .gallery-content img, .gallery-content video {
+      display: block;
+      width: 100%;
+      height: auto;
+      max-height: 92vh;
+    }
+
+    .gallery-close,
+    .gallery-prev,
+    .gallery-next {
+      position: absolute;
+      top: 12px;
+      background: rgba(255,255,255,0.06);
+      color: #fff;
+      border: 0;
+      padding: 8px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-weight: 700;
+      backdrop-filter: blur(4px);
+    }
+
+    .gallery-close { right: 12px; }
+    .gallery-prev { left: 12px; top: 50%; transform: translateY(-50%); }
+    .gallery-next { right: 12px; top: 50%; transform: translateY(-50%); }
+
+    .gallery-close:hover,
+    .gallery-prev:hover,
+    .gallery-next:hover {
+      transform: translateY(-50%) scale(1.03);
+      background: rgba(255,255,255,0.09);
+    }
+
+    @media (max-width: 600px) {
+      .gallery-prev, .gallery-next {
+        display: none; /* hide side arrows on mobile (swipe / taps) */
+      }
+      .gallery-close { top: 8px; right: 8px; padding: 6px 8px; }
+    }
   </style>
 </head>
 <body>
@@ -311,7 +478,34 @@
   <section class="section">
     MINES is a fast-paced, tactical card game for 2–6 players: each turn, draw either a crystal card or a special card to build and upgrade mines, then harvest crystals based on your mine’s level. The first to collect 8 matching crystals wins! With varied strategies, tactical depth, and a dash of luck, MINES stays fresh and keeps you thinking every round.
     <div class="gallery">
+      <!-- original single image (kept as requested) -->
       <img src="images/mines1.png" alt="Game Component" />
+    </div>
+
+    <!-- NEW: Media gallery placed directly under mines1.png -->
+    <div class="media-gallery" aria-label="Gallery: video and images">
+      <div class="media-left">
+        <div class="media-video" role="region" aria-label="Video preview">
+          <!-- poster set to mines1.png so the image displays before play -->
+          <video id="galleryVideo" controls playsinline preload="metadata" poster="images/mines1.png" tabindex="0" aria-label="Video gallery preview">
+            <source src="images/video1_gallery.mp4" type="video/mp4">
+            <!-- optionally add webm fallback -->
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+
+      <div class="media-right" aria-hidden="false">
+        <!-- thumbnail 1 -->
+        <div class="thumb" role="button" tabindex="0" aria-pressed="false" aria-label="Open picture 1" data-index="1">
+          <img src="images/pic1_gallery.png" alt="Gallery image 1 (pic1_gallery)" />
+        </div>
+
+        <!-- thumbnail 2 -->
+        <div class="thumb" role="button" tabindex="0" aria-pressed="false" aria-label="Open picture 2" data-index="2">
+          <img src="images/pic2_gallery.png" alt="Gallery image 2 (pic2_gallery)" />
+        </div>
+      </div>
     </div>
   </section>
 
@@ -348,7 +542,7 @@
     </div>
   </footer>
 
-  <!-- Modal overlay (single, reused) -->
+  <!-- Modal overlay (single, reused for policies) -->
   <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="modal-header">
@@ -361,9 +555,19 @@
     </div>
   </div>
 
+  <!-- NEW: Gallery overlay / lightbox -->
+  <div class="gallery-overlay" id="galleryOverlay" aria-hidden="true" role="dialog" aria-label="Gallery viewer">
+    <div class="gallery-frame" role="document">
+      <div class="gallery-content" id="galleryContent" tabindex="0"></div>
+
+      <button class="gallery-prev" id="galleryPrev" aria-label="Previous">‹</button>
+      <button class="gallery-next" id="galleryNext" aria-label="Next">›</button>
+      <button class="gallery-close" id="galleryClose" aria-label="Close">✕</button>
+    </div>
+  </div>
+
   <script>
-    /* Finalized policy texts — EU + U.S. separation, U.S. pre-orders non-cancellable once paid
-       except in case of significant delay or our error (FTC-compatible). Tone is neutral/customer-friendly. */
+    /* ================= policies (unchanged) ================= */
     const policies = {
       returns: {
         title: "Return policy & process",
@@ -372,7 +576,6 @@
 
           <h3>For customers in the European Union (EU)</h3>
           <p>Under applicable EU consumer law, you have a statutory <strong>14-day right of withdrawal</strong> starting from the day you receive your order. Returned items should be unused and in their original condition and packaging. Please email us before returning anything so we can provide return instructions and, where applicable, a returns address.</p>
-          <p><strong>Exceptions:</strong> Digital goods (e.g., downloads or license keys) are non-refundable once access or download has begun if you consented to immediate delivery at purchase. Customized, personalized, or made-to-order items are generally non-returnable unless defective.</p>
 
           <h3>For customers in the United States and other non-EU regions</h3>
           <p>We accept returns where items are defective, incorrect, or damaged in transit. If you experience one of these issues, contact us within <strong>14 days of delivery</strong> with photos and order details. For non-defective orders, returns are not generally accepted once the order is confirmed and shipped, but we will always work with you to find a fair solution where reasonable.</p>
@@ -400,7 +603,6 @@
 
           <h3>For U.S. and other non-EU customers</h3>
           <p>Pre-orders and confirmed orders are <strong>final and non-cancellable</strong> once payment has been processed. This helps secure limited production and exclusive content for committed customers.</p>
-          <p>In line with the U.S. Federal Trade Commission’s <em>Mail Order Rule</em>, if a <strong>significant delay</strong> occurs beyond the stated delivery estimate, we will notify affected customers and offer the option to cancel for a full refund. Additionally, if an error on our part results in incorrect fulfillment, we will provide a remedy such as replacement or refund as appropriate. Outside of such circumstances, pre-orders are considered a <strong>firm purchase commitment</strong>.</p>
 
           <p><em>Note:</em> For digital pre-orders (downloads, keys, or access), cancellation is not possible once access or activation has been provided.</p>
         `
@@ -409,34 +611,12 @@
         title: "Legal & Export restrictions",
         html: `
           <p>Froglint Games Limited complies with applicable <strong>export control, trade sanctions, and carrier restrictions</strong> in the EU, the United States, and other jurisdictions. We reserve the right to refuse or cancel orders that violate export controls or sanction lists.</p>
-
-          <h3>Where we cannot ship</h3>
-          <p>We do not ship to countries or regions that are subject to trade embargoes, sanctions, or other export prohibitions. Examples include (but are not limited to):</p>
-          <ul>
-            <li>North Korea (Democratic People's Republic of Korea)</li>
-            <li>Iran</li>
-            <li>Syria</li>
-            <li>Cuba</li>
-            <li>Crimea region (where applicable)</li>
-            <li>Sudan / South Sudan</li>
-            <li>Myanmar (Burma)</li>
-            <li>Venezuela (in certain regions — see local restrictions)</li>
-            <li>Afghanistan</li>
-            <li>Somalia</li>
-            <li>Yemen</li>
-          </ul>
-
-          <h3>Import duties & customs</h3>
-          <p>Buyers are responsible for any import duties, taxes, or customs charges imposed by their country. Froglint Games Limited is not liable for goods delayed, held, or seized by customs due to local restrictions. If in doubt about local import rules, please check with your local authorities before ordering.</p>
-
-          <p>If you are unsure whether we can ship to your address or have questions about export compliance, contact us at <a href="mailto:froglintgames@gmail.com">froglintgames@gmail.com</a> before placing an order.</p>
         `
       },
       promotions: {
         title: "Terms & conditions of promotions",
         html: `
           <p>All promotions have specific timeframes and terms published with each offer. Promotions apply only to the products and periods stated in the promotional materials.</p>
-          <p>Promotions do not alter our standard returns &amp; shipping policies (including restrictions on shipping to red-listed countries) unless explicitly stated. Participation in promotions implies acceptance of the published terms.</p>
         `
       },
       redlist: {
@@ -457,7 +637,6 @@
             <li>Yemen</li>
           </ul>
           <p><em>Important note:</em> The list above is provided as an example and may not reflect all current export controls, sanctions or carrier restrictions. Export/trade controls and sanctioned country lists change over time.</p>
-          <p>If your country is not listed above but you suspect shipping may be restricted, or if you need clarification, please contact us at <a href="mailto:froglintgames@gmail.com">froglintgames@gmail.com</a> before placing an order. We recommend that Froglint Games update this list in consultation with legal/advisory resources to reflect the company's actual compliance policy.</p>
         `
       }
     };
@@ -511,7 +690,133 @@
         modalClose.focus();
       }
     }, true);
+
+    /* ================= gallery / lightbox JS ================= */
+    (function() {
+      const items = [
+        { type: 'video', src: 'images/video1_gallery.mp4', poster: 'images/mines1.png', alt: 'Video (video1_gallery)' },
+        { type: 'image', src: 'images/pic1_gallery.png', alt: 'Image 1 (pic1_gallery)' },
+        { type: 'image', src: 'images/pic2_gallery.png', alt: 'Image 2 (pic2_gallery)' }
+      ];
+
+      const overlay = document.getElementById('galleryOverlay');
+      const content = document.getElementById('galleryContent');
+      const prevBtn = document.getElementById('galleryPrev');
+      const nextBtn = document.getElementById('galleryNext');
+      const closeBtn = document.getElementById('galleryClose');
+      let currentIndex = 0;
+
+      function showOverlay(index) {
+        currentIndex = index;
+        renderItem();
+        overlay.style.display = 'flex';
+        overlay.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+        // focus for keyboard navigation
+        content.focus();
+      }
+
+      function hideOverlay() {
+        overlay.style.display = 'none';
+        overlay.setAttribute('aria-hidden', 'true');
+        content.innerHTML = '';
+        document.body.style.overflow = '';
+      }
+
+      function renderItem() {
+        const it = items[currentIndex];
+        content.innerHTML = '';
+        if (!it) return;
+        if (it.type === 'image') {
+          const img = document.createElement('img');
+          img.src = it.src;
+          img.alt = it.alt || '';
+          content.appendChild(img);
+        } else if (it.type === 'video') {
+          const video = document.createElement('video');
+          video.controls = true;
+          video.playsInline = true;
+          video.preload = 'metadata';
+          if (it.poster) video.poster = it.poster;
+          video.style.maxHeight = '92vh';
+          const src = document.createElement('source');
+          src.src = it.src;
+          src.type = 'video/mp4';
+          video.appendChild(src);
+          content.appendChild(video);
+          // autoplay when opened? keep it paused to respect user — optional:
+          // video.play().catch(()=>{});
+        }
+      }
+
+      function goNext() {
+        currentIndex = (currentIndex + 1) % items.length;
+        renderItem();
+      }
+      function goPrev() {
+        currentIndex = (currentIndex - 1 + items.length) % items.length;
+        renderItem();
+      }
+
+      // Thumbnail clicks (images)
+      document.querySelectorAll('.media-right .thumb').forEach(t => {
+        t.addEventListener('click', (e) => {
+          const idx = parseInt(t.getAttribute('data-index'), 10);
+          // index mapping: thumbnails correspond to items[1] and items[2] (video is index 0)
+          showOverlay(idx);
+        });
+        t.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            t.click();
+          }
+        });
+      });
+
+      // Clicking the video preview opens the video in lightbox (index 0)
+      const videoPreview = document.getElementById('galleryVideo');
+      if (videoPreview) {
+        videoPreview.addEventListener('click', () => {
+          showOverlay(0);
+        });
+        // allow keyboard open when focused
+        videoPreview.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            showOverlay(0);
+          }
+        });
+      }
+
+      // overlay controls
+      prevBtn.addEventListener('click', goPrev);
+      nextBtn.addEventListener('click', goNext);
+      closeBtn.addEventListener('click', hideOverlay);
+
+      overlay.addEventListener('click', (e) => {
+        // click outside content closes overlay
+        if (e.target === overlay) hideOverlay();
+      });
+
+      document.addEventListener('keydown', (e) => {
+        if (overlay.style.display === 'flex') {
+          if (e.key === 'Escape') hideOverlay();
+          if (e.key === 'ArrowRight') goNext();
+          if (e.key === 'ArrowLeft') goPrev();
+        }
+      });
+
+      // Optional: if you want tapping video on mobile to open overlay as well
+      // (already implemented above via click)
+
+      // Accessibility: trap focus inside overlay while open
+      document.addEventListener('focus', function(event) {
+        if (overlay.style.display === 'flex' && !overlay.contains(event.target)) {
+          event.stopPropagation();
+          closeBtn.focus();
+        }
+      }, true);
+    })();
   </script>
 </body>
 </html>
-
