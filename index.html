@@ -260,7 +260,7 @@
 
   <img src="images/mines-hero.png" alt="MINES Game Hero" class="hero-image" />
   <div class="preorder-container">
-    <a href="https://ko-fi.com/s/72916d4009" class="preorder-button" target="_blank" rel="noopener">PRE-ORDER NOW</a>
+    <a href="https://www.kickstarter.com/projects/froglintgames/mines" class="preorder-button" target="_blank" rel="noopener">KICKSTARTER</a>
   </div>
 
   <section class="section">
@@ -305,7 +305,7 @@
   <section class="mail-form-wrap">
     <div class="mail-form-container">
       <h2 style="text-align:center; color:var(--accent); margin-bottom:1rem; margin-top:0;">Join the Mailing List</h2>
-      <form class="mail-form" action="https://formsubmit.co/froglintgames@gmail.com" method="POST" accept-charset="UTF-8">
+      <form class="mail-form" action="https://formsubmit.co/f378d5e4c4a3aa0c7cce8ea1a43f0f3a" method="POST" accept-charset="UTF-8">
         <input type="email" name="email" placeholder="your.email@gmail.com" aria-label="Email address" required>
         <input type="hidden" name="_subject" value="New mailing list signup - MINES">
         <input type="hidden" name="_next" value="https://froglintgames.github.io/?thanks">
@@ -484,77 +484,4 @@
         if (v && !v.paused) try { v.pause(); } catch(e){}
         overlay.style.display = 'none';
         overlay.setAttribute('aria-hidden', 'true');
-        content.innerHTML = '';
-        document.body.style.overflow = '';
-      }
-
-      function renderItem() {
-        const it = items[currentIndex];
-        content.innerHTML = '';
-        if (!it) return;
-        if (it.type === 'image') {
-          const img = document.createElement('img');
-          img.src = it.src;
-          img.alt = it.alt || '';
-          content.appendChild(img);
-        } else if (it.type === 'video') {
-          const video = document.createElement('video');
-          video.controls = true;
-          video.playsInline = true;
-          video.preload = 'metadata';
-          video.style.maxHeight = '92vh';
-          if (it.poster) video.poster = it.poster;
-          const src = document.createElement('source');
-          src.src = it.src;
-          src.type = 'video/mp4';
-          video.appendChild(src);
-          content.appendChild(video);
-        }
-      }
-
-      function goNext() { currentIndex = (currentIndex + 1) % items.length; renderItem(); }
-      function goPrev() { currentIndex = (currentIndex - 1 + items.length) % items.length; renderItem(); }
-
-      // Open video overlay when clicking the preview video element
-      const videoPreview = document.getElementById('galleryVideo');
-      if (videoPreview) {
-        videoPreview.addEventListener('click', () => showOverlay(0));
-        videoPreview.addEventListener('keydown', (e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); showOverlay(0); }});
-      }
-
-      // Thumbnail click for single image
-      document.querySelectorAll('.media-right .thumb').forEach(t => {
-        t.addEventListener('click', () => {
-          const idx = parseInt(t.getAttribute('data-index'), 10);
-          showOverlay(idx);
-        });
-        t.addEventListener('keydown', (e) => {
-          if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); t.click(); }
-        });
-      });
-
-      prevBtn.addEventListener('click', goPrev);
-      nextBtn.addEventListener('click', goNext);
-      closeBtn.addEventListener('click', hideOverlay);
-
-      overlay.addEventListener('click', (e) => { if (e.target === overlay) hideOverlay(); });
-
-      document.addEventListener('keydown', (e) => {
-        if (overlay.style.display === 'flex') {
-          if (e.key === 'Escape') hideOverlay();
-          if (e.key === 'ArrowRight') goNext();
-          if (e.key === 'ArrowLeft') goPrev();
-        }
-      });
-
-      // Focus trap for gallery overlay
-      document.addEventListener('focus', function(event) {
-        if (overlay.style.display === 'flex' && !overlay.contains(event.target)) {
-          event.stopPropagation();
-          closeBtn.focus();
-        }
-      }, true);
-    })();
-  </script>
-</body>
-</html>
+        content
