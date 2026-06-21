@@ -186,7 +186,13 @@
     }
 
     /* Mailing list form styles */
-    .mail-form-wrap { padding:1.5rem 1rem; max-width:900px; margin:0 auto 1.5rem; }
+    .mail-form-wrap { padding:1.5rem 1rem; max-width:600px; margin:0 auto 1.5rem; }
+    .mail-form-container {
+      background: #1a1a1a;
+      padding: 2rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+    }
     .mail-form {
       display:flex;
       gap:0.6rem;
@@ -206,21 +212,41 @@
       font-size:1rem;
     }
     .mail-form button[type="submit"] {
-      padding:0.8rem 1rem;
+      padding:0.8rem 1.5rem;
       border-radius:8px;
       border:0;
       font-weight:700;
       cursor:pointer;
       background:var(--accent);
       color:#000;
+      font-size: 1rem;
+      transition: background 0.2s;
     }
-    .mail-note { color:#cfcfcf; font-size:0.9rem; text-align:center; margin-top:0.6rem; }
+    .mail-form button[type="submit"]:hover {
+      background: #00cc6a;
+    }
+    .mail-terms {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      color: #cfcfcf;
+      font-size: 0.9rem;
+      cursor: pointer;
+      text-align: left;
+    }
+    .mail-terms input[type="checkbox"] {
+      margin-top: 0.2rem;
+      accent-color: var(--accent);
+      cursor: pointer;
+    }
+    .mail-note { color:#888; font-size:0.85rem; text-align:center; margin-top:1rem; border-top: 1px solid rgba(255,255,255,0.05); padding-top: 0.8rem; }
 
     @media (max-width:600px) {
-      .mail-form { flex-direction:column; align-items:stretch; gap:0.5rem; padding:0 0.5rem; }
+      .mail-form { flex-direction:column; align-items:stretch; gap:0.5rem; }
       .mail-form button[type="submit"] { width:100%; }
       .mail-form input[type="email"] { width:100%; }
-      .mail-note { text-align:left; padding:0 6px; }
+      .mail-form-container { padding: 1.2rem; }
     }
   </style>
 </head>
@@ -240,12 +266,10 @@
   <section class="section">
     MINES is a fast-paced, tactical card game for 2–6 players: each turn, draw either a crystal card or a special card to build and upgrade mines, then harvest crystals based on your mine’s level. The first to collect 8 matching crystals wins! With varied strategies, tactical depth, and a dash of luck, MINES stays fresh and keeps you thinking every round.
 
-    <!-- existing single image (kept) -->
     <div class="single-image-wrap" aria-hidden="false">
       <img src="images/mines1.png" alt="Game Component" />
     </div>
 
-    <!-- NEW media gallery placed directly under mines1.png -->
     <div class="media-gallery" aria-label="Gallery: video and image">
       <div class="media-left">
         <div class="media-video" role="region" aria-label="Video preview">
@@ -266,9 +290,8 @@
 
   <section class="section">
     <div class="info-strip">
-      <p>We are currently raising funds through pre-orders as part of our pre-campaign. You can pre-order our products now to support the early phase.</p>
-      <p>Soon, we will launch our official Kickstarter campaign, followed by the full release of MINES. First, we aim to raise enough funds through pre-orders.</p>
-      <p>Then, we will launch our Kickstarter campaign, giving the game more traction and increasing our chances of success. In short, there are two campaigns: one for pre-orders and one on Kickstarter.</p>
+      <p>Soon, we will launch our official Kickstarter campaign, followed by the full release of MINES.</p>
+      <p>We aim to launch our Kickstarter campaign, giving the game more traction and increasing our chances of success.</p>
     </div>
   </section>
 
@@ -279,22 +302,27 @@
     </p>
   </section>
 
-  <!-- Mailing list / subscribe -->
   <section class="mail-form-wrap">
-    <h2 style="text-align:center; color:var(--accent); margin-bottom:0.6rem;">Join the Mailing List</h2>
-    <!-- Using FormSubmit: posts to your email. On first use you will need to confirm via an email sent to froglintgames@gmail.com -->
-    <form class="mail-form" action="https://formsubmit.co/froglintgames@gmail.com" method="POST" accept-charset="UTF-8">
-      <input type="email" name="email" placeholder="your.email@gmail.com" aria-label="Email address" required>
-      <!-- optional hidden fields for subject/redirect -->
-      <input type="hidden" name="_subject" value="New mailing list signup - MINES">
-      <input type="hidden" name="_next" value="https://froglintgames.github.io/?thanks">
-      <button type="submit" class="preorder-button">Subscribe</button>
-    </form>
-    <p class="mail-note">You'll receive a confirmation email — please confirm to activate the subscription.</p>
+    <div class="mail-form-container">
+      <h2 style="text-align:center; color:var(--accent); margin-bottom:1rem; margin-top:0;">Join the Mailing List</h2>
+      <form class="mail-form" action="https://formsubmit.co/froglintgames@gmail.com" method="POST" accept-charset="UTF-8">
+        <input type="email" name="email" placeholder="your.email@gmail.com" aria-label="Email address" required>
+        <input type="hidden" name="_subject" value="New mailing list signup - MINES">
+        <input type="hidden" name="_next" value="https://froglintgames.github.io/?thanks">
+        <button type="submit">Subscribe</button>
+      </form>
+      
+      <label class="mail-terms">
+        <input type="checkbox" name="terms_agreement" required>
+        <span>I agree to the Terms of Service and Privacy Policy.</span>
+      </label>
+
+      <p class="mail-note">You'll receive a confirmation email — please confirm to activate the subscription.</p>
+    </div>
   </section>
 
   <footer>
-    <p>© 2025 Froglint Games Limited</p>
+    <p>© 2026 Froglint Games Limited</p>
     <div class="socials" role="navigation" aria-label="Socials and policies">
       <a href="https://www.facebook.com/profile.php?id=61583312233767" target="_blank" rel="noopener">Facebook</a>
       <a href="mailto:froglintgames@gmail.com">Email</a>
@@ -308,7 +336,6 @@
     </div>
   </footer>
 
-  <!-- Modal overlay for policies -->
   <div class="modal-overlay" id="modalOverlay" aria-hidden="true">
     <div class="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
       <div class="modal-header">
@@ -319,7 +346,6 @@
     </div>
   </div>
 
-  <!-- Lightbox overlay -->
   <div class="gallery-overlay" id="galleryOverlay" aria-hidden="true" role="dialog" aria-label="Gallery - enlarged view">
     <div class="gallery-frame" role="document">
       <div class="gallery-content" id="galleryContent" tabindex="0"></div>
